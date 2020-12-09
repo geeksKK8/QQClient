@@ -6,38 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>615</width>
-    <height>505</height>
+    <width>671</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>TcpClient</string>
   </property>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>20</y>
-     <width>401</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEditSend">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>290</y>
-     <width>281</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButtonSend">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>290</y>
+     <x>490</x>
+     <y>390</y>
      <width>93</width>
      <height>31</height>
     </rect>
@@ -46,32 +26,25 @@
     <string>发送</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEditUserName">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>330</y>
-     <width>281</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="lineEditServerIP">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>370</y>
-     <width>281</width>
+     <x>160</x>
+     <y>460</y>
+     <width>161</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>121.196.156.126</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_4">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>410</y>
-     <width>281</width>
+     <x>380</x>
+     <y>460</y>
+     <width>61</width>
      <height>31</height>
     </rect>
    </property>
@@ -82,22 +55,22 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>330</y>
-     <width>72</width>
-     <height>15</height>
+     <x>10</x>
+     <y>10</y>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>用户名：</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>370</y>
-     <width>91</width>
+     <x>60</x>
+     <y>470</y>
+     <width>111</width>
      <height>16</height>
     </rect>
    </property>
@@ -108,8 +81,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>410</y>
+     <x>330</x>
+     <y>470</y>
      <width>72</width>
      <height>15</height>
     </rect>
@@ -121,14 +94,287 @@
   <widget class="QPushButton" name="pushButtonEnter">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>470</x>
      <y>460</y>
-     <width>381</width>
-     <height>28</height>
+     <width>111</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>进入聊天室</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>270</y>
+     <width>546</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFontComboBox" name="fontCbx"/>
+    </item>
+    <item>
+     <widget class="QComboBox" name="sizeCbx">
+      <property name="currentIndex">
+       <number>4</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>8</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>9</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>10</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>11</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>12</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>13</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>14</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>15</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>16</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>17</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>18</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>19</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>20</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>21</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>22</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="boldTBtn">
+      <property name="toolTip">
+       <string>加粗</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../QQChat/MyselfQQ/images/bold.png</normaloff>../QQChat/MyselfQQ/images/bold.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="italicTBtn">
+      <property name="toolTip">
+       <string>倾斜</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../QQChat/MyselfQQ/images/italic.png</normaloff>../QQChat/MyselfQQ/images/italic.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="underlineTBtn">
+      <property name="toolTip">
+       <string>下划线</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../QQChat/MyselfQQ/images/under.png</normaloff>../QQChat/MyselfQQ/images/under.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="colorTBtn">
+      <property name="toolTip">
+       <string>更改字体颜色</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../QQChat/MyselfQQ/images/color.png</normaloff>../QQChat/MyselfQQ/images/color.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="saveTBtn">
+      <property name="toolTip">
+       <string>保存聊天记录</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../QQChat/MyselfQQ/images/save.png</normaloff>../QQChat/MyselfQQ/images/save.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QToolButton" name="clearTBtn">
+      <property name="toolTip">
+       <string>清空聊天记录</string>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../QQChat/MyselfQQ/images/clear.png</normaloff>../QQChat/MyselfQQ/images/clear.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>26</width>
+        <height>26</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="autoRaise">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTextEdit" name="msgTxtEdit">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>310</y>
+     <width>401</width>
+     <height>121</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>50</y>
+     <width>551</width>
+     <height>211</height>
+    </rect>
    </property>
   </widget>
  </widget>

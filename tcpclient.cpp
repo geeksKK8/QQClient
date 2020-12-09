@@ -2,6 +2,9 @@
 #include "ui_tcpclient.h"
 #include <QHostAddress>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QColorDialog>
+#include <QTextCharFormat>
 TcpClient::TcpClient(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TcpClient)
@@ -19,7 +22,10 @@ TcpClient::~TcpClient()
 {
     delete ui;
 }
-
+void TcpClient::setUserName(QString s){
+    ui->label->setText(s+",欢迎你");
+    userName=s;
+}
 
 //进入聊天室
 void TcpClient::on_pushButtonEnter_clicked()
@@ -36,15 +42,8 @@ void TcpClient::on_pushButtonEnter_clicked()
             QMessageBox::warning(this, "错误", "IP地址不正确");
             return;
         }
-        if(ui->lineEditUserName->text() == "")
-        {
-            //用户名不能为空
-            QMessageBox::warning(this, "错误", "用户名不能为空");
-            return;
-        }
 
-        //从界面获取用户名
-        userName = ui->lineEditUserName->text();
+
         //创建一个通信套接字，用来和服务器进行通信
         tcpsocket = new QTcpSocket(this);
         //和服务器连接成功能会触发connected信号
@@ -100,9 +99,10 @@ void TcpClient::slotconnectedsuccess()
 //        return;
 //    }
     tcpsocket->write(msg.toUtf8().data());
+
 }
 
-
+//收到消息
 void TcpClient::slotreceive()
 {
 //    while(tcpsocket->bytesAvailable() > 0 )
@@ -114,19 +114,20 @@ void TcpClient::slotreceive()
 //        ui->textEdit->append(msg.left(datagram.size()));
 //    }
     QByteArray array = tcpsocket->readAll();
-    ui->textEdit->append(array);
+    ui->textEdit->append(QString(array).toHtmlEscaped());
 }
 
+//发送消息
 void TcpClient::on_pushButtonSend_clicked()
 {
-    if(ui->lineEditSend->text() == "")
+    if(ui->msgTxtEdit->toHtml() == "")
     {
         return;
     }
-    QString msg = userName + ":" + ui->lineEditSend->text();
+    QString msg = userName + " :" + ui->msgTxtEdit->toPlainText();
    // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
     tcpsocket->write(msg.toUtf8().data());
-    ui->lineEditSend->clear();
+    ui->msgTxtEdit->clear();
 }
 
 void TcpClient::slotdisconnected()
@@ -134,3 +135,87 @@ void TcpClient::slotdisconnected()
     ui->pushButtonSend->setEnabled(false);
     ui->pushButtonEnter->setText("进入聊天室");
 }
+
+//样式设置
+void TcpClient::on_fontCbx_currentFontChanged(const QFont &f)
+{
+    ui->msgTxtEdit->setCurrentFont(f);
+    ui->msgTxtEdit->setFocus();
+}
+
+void TcpClient::on_sizeCbx_currentIndexChanged(const QString &arg1)
+{
+    ui->msgTxtEdit->setFontPointSize(arg1.toDouble());
+    ui->msgTxtEdit->setFocus();
+}
+
+void TcpClient::on_boldTBtn_clicked(bool checked)
+{
+    if(checked)
+        ui->msgTxtEdit->setFontWeight(QFont::Bold);
+    else
+        ui->msgTxtEdit->setFontWeight(QFont::Normal);
+    ui->msgTxtEdit->setFocus();
+}
+
+void TcpClient::on_italicTBtn_clicked(bool checked)
+{
+    ui->msgTxtEdit->setFontItalic(checked);
+    ui->msgTxtEdit->setFocus();
+}
+
+void TcpClient::on_underlineTBtn_clicked(bool checked)
+{
+    ui->msgTxtEdit->setFontUnderline(checked);
+    ui->msgTxtEdit->setFocus();
+}
+void TcpClient::on_clearTBtn_clicked()
+{
+    ui->textEdit->clear();
+}
+void TcpClient::on_colorTBtn_clicked()
+{
+    color = QColorDialog::getColor(color,this);
+    if(color.isValid()){
+        ui->msgTxtEdit->setTextColor(color);
+        ui->msgTxtEdit->setFocus();
+    }
+}
+
+void TcpClient::curFmtChanged(const QTextCharFormat &fmt)
+{
+    ui->fontCbx->setCurrentFont(fmt.font());
+
+    if (fmt.fontPointSize() < 8) {
+        ui->sizeCbx->setCurrentIndex(4);
+    } else {
+        ui->sizeCbx->setCurrentIndex(ui->sizeCbx->findText(QString::number(fmt.fontPointSize())));
+    }
+    ui->boldTBtn->setChecked(fmt.font().bold());
+    ui->italicTBtn->setChecked(fmt.font().italic());
+    ui->underlineTBtn->setChecked(fmt.font().underline());
+    color = fmt.foreground().color();
+}
+bool TcpClient::saveFile(const QString &filename)
+{
+    QFile file(filename);
+    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, tr("保存文件"),tr("无法保存文件 %1:\n %2").arg(filename).arg(file.errorString()));
+        return false;
+    }
+    QTextStream out(&file);
+    out << ui->textEdit->toPlainText();
+
+    return true;
+}
+void TcpClient::on_saveTBtn_clicked()
+{
+    if (ui->textEdit->document()->isEmpty()) {
+        QMessageBox::warning(0, tr("警告"), tr("聊天记录为空，无法保存！"), QMessageBox::Ok);
+    } else {
+        QString fname = QFileDialog::getSaveFileName(this,tr("保存聊天记录"), tr("聊天记录"), tr("文本(*.txt);;所有文件(*.*)"));
+        if(!fname.isEmpty())
+            saveFile(fname);
+    }
+}
+
