@@ -7,6 +7,7 @@
 
 #include <QWidget>
 #include <QTextCharFormat>
+#include <QTableWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TcpClient;}
@@ -20,6 +21,8 @@ public:
     TcpClient(QWidget *parent = nullptr);
     ~TcpClient();
     void setUserName(QString s);
+protected:
+    void usrEnter(QString usrname);
 private slots:
     void on_pushButtonEnter_clicked();
     void slotconnectedsuccess();//用来处理连接成功的信号
@@ -37,6 +40,10 @@ private slots:
     void on_saveTBtn_clicked();
     void on_clearTBtn_clicked();
     bool saveFile(const QString& filename);
+
+    void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
+
+    void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
 private:
     Ui::TcpClient *ui;    

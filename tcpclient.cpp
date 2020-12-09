@@ -98,6 +98,7 @@ void TcpClient::slotconnectedsuccess()
 //    {
 //        return;
 //    }
+    msg = "0"+msg;
     tcpsocket->write(msg.toUtf8().data());
 
 }
@@ -113,8 +114,30 @@ void TcpClient::slotreceive()
 //        QString msg = datagram.data();
 //        ui->textEdit->append(msg.left(datagram.size()));
 //    }
-    QByteArray array = tcpsocket->readAll();
-    ui->textEdit->append(QString(array).toHtmlEscaped());
+
+    QByteArray sign = tcpsocket->read(1);
+    qDebug()<<QString(sign);
+    if(sign == "0"){
+        qDebug()<<"success";
+        QString string = tcpsocket->readAll();
+        ui->textEdit->append(string.toHtmlEscaped());
+        QString name = string.split(":")[0];
+        usrEnter(name);
+    }
+    else{
+        QByteArray array = tcpsocket->readAll();
+        ui->textEdit->append(QString(array).toHtmlEscaped());
+    }
+}
+
+void TcpClient::usrEnter(QString usrname)
+{
+    QTableWidgetItem *usr = new QTableWidgetItem(usrname);
+    //QTableWidgetItem *ip = new QTableWidgetItem(ipaddr);
+
+    ui->tableWidget->insertRow(0);
+    ui->tableWidget->setItem(0,0,usr);
+    //ui->usrTblWidget->setItem(0,1,ip);
 }
 
 //发送消息
@@ -124,7 +147,7 @@ void TcpClient::on_pushButtonSend_clicked()
     {
         return;
     }
-    QString msg = userName + " :" + ui->msgTxtEdit->toPlainText();
+    QString msg = "1"+userName + " :" + ui->msgTxtEdit->toPlainText();
    // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
     tcpsocket->write(msg.toUtf8().data());
     ui->msgTxtEdit->clear();
@@ -208,6 +231,7 @@ bool TcpClient::saveFile(const QString &filename)
 
     return true;
 }
+
 void TcpClient::on_saveTBtn_clicked()
 {
     if (ui->textEdit->document()->isEmpty()) {
@@ -219,3 +243,21 @@ void TcpClient::on_saveTBtn_clicked()
     }
 }
 
+
+
+void TcpClient::on_tableWidget_itemDoubleClicked(QTableWidgetItem *item)
+{
+    //QString msg = "2"+ item->text() + " :" + ui->msgTxtEdit->toPlainText();
+   // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
+    //tcpsocket->write(msg.toUtf8().data());
+    //ui->msgTxtEdit->clear();
+}
+
+void TcpClient::on_tableWidget_itemClicked(QTableWidgetItem *item)
+{
+    qDebug()<<"succ!";
+    QString msg = "2"+ item->text() + " :" + ui->msgTxtEdit->toPlainText();
+   // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
+    tcpsocket->write(msg.toUtf8().data());
+    ui->msgTxtEdit->clear();
+}

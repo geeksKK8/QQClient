@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>671</width>
+    <width>799</width>
     <height>531</height>
    </rect>
   </property>
@@ -109,7 +109,7 @@
     <rect>
      <x>60</x>
      <y>270</y>
-     <width>546</width>
+     <width>575</width>
      <height>35</height>
     </rect>
    </property>
@@ -209,7 +209,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../QQChat/MyselfQQ/images/bold.png</normaloff>../QQChat/MyselfQQ/images/bold.png</iconset>
+        <normaloff>images/bold.png</normaloff>images/bold.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -235,7 +235,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../QQChat/MyselfQQ/images/italic.png</normaloff>../QQChat/MyselfQQ/images/italic.png</iconset>
+        <normaloff>images/italic.png</normaloff>images/italic.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -261,7 +261,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../QQChat/MyselfQQ/images/under.png</normaloff>../QQChat/MyselfQQ/images/under.png</iconset>
+        <normaloff>images/under.png</normaloff>images/under.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -287,7 +287,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../QQChat/MyselfQQ/images/color.png</normaloff>../QQChat/MyselfQQ/images/color.png</iconset>
+        <normaloff>images/color.png</normaloff>images/color.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -313,7 +313,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../QQChat/MyselfQQ/images/save.png</normaloff>../QQChat/MyselfQQ/images/save.png</iconset>
+        <normaloff>images/save.png</normaloff>images/save.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -339,7 +339,7 @@
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>../QQChat/MyselfQQ/images/clear.png</normaloff>../QQChat/MyselfQQ/images/clear.png</iconset>
+        <normaloff>images/clear.png</normaloff>images/clear.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -376,6 +376,21 @@
      <height>211</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>50</y>
+     <width>131</width>
+     <height>441</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>用户名</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

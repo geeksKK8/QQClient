@@ -63,9 +63,8 @@ void Logger::showclient()
 void Logger::on_logupbutton_clicked()
 {
     QSqlQuery sql_query;
-    QString insert_sql = "insert into user values (?, ?, ?)";
+    QString insert_sql = "insert into user values (NULL, ?, ?)";
     sql_query.prepare(insert_sql);
-    sql_query.addBindValue(NULL);
     sql_query.addBindValue(ui->username->text());
     sql_query.addBindValue(ui->password->text());
 
