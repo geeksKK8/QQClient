@@ -92,7 +92,7 @@ void TcpClient::slotconnectedsuccess()
 
     //int length = 0;
     //将用户名发送给服务器
-    QString msg= userName + " :Enter Chat Room";
+    QString msg= userName + ":Enter Chat Room";
 
 //    if((length = tcpsocket->write((char*)msg.toUtf8().data(), msg.length())) != msg.length())
 //    {
@@ -118,11 +118,18 @@ void TcpClient::slotreceive()
     QByteArray sign = tcpsocket->read(1);
     qDebug()<<QString(sign);
     if(sign == "0"){
-        qDebug()<<"success";
+        qDebug()<<"fxxk";
         QString string = tcpsocket->readAll();
-        ui->textEdit->append(string.toHtmlEscaped());
-        QString name = string.split(":")[0];
-        usrEnter(name);
+        QString msg = string.split("_")[0];
+        qDebug()<<string;
+        int sz = string.split("_").size();
+        ui->textEdit->append(msg.toHtmlEscaped());
+        for(int i=0;i<ui->tableWidget->rowCount();i++)
+            ui->tableWidget->removeRow(i);
+        for(int i=1;i<sz;i++){
+            QString name = string.split("_")[i];
+            usrEnter(name);
+        }
     }
     else{
         QByteArray array = tcpsocket->readAll();
@@ -134,7 +141,6 @@ void TcpClient::usrEnter(QString usrname)
 {
     QTableWidgetItem *usr = new QTableWidgetItem(usrname);
     //QTableWidgetItem *ip = new QTableWidgetItem(ipaddr);
-
     ui->tableWidget->insertRow(0);
     ui->tableWidget->setItem(0,0,usr);
     //ui->usrTblWidget->setItem(0,1,ip);
@@ -245,13 +251,6 @@ void TcpClient::on_saveTBtn_clicked()
 
 
 
-void TcpClient::on_tableWidget_itemDoubleClicked(QTableWidgetItem *item)
-{
-    //QString msg = "2"+ item->text() + " :" + ui->msgTxtEdit->toPlainText();
-   // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
-    //tcpsocket->write(msg.toUtf8().data());
-    //ui->msgTxtEdit->clear();
-}
 
 void TcpClient::on_tableWidget_itemClicked(QTableWidgetItem *item)
 {

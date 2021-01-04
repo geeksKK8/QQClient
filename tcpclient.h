@@ -41,8 +41,6 @@ private slots:
     void on_clearTBtn_clicked();
     bool saveFile(const QString& filename);
 
-    void on_tableWidget_itemDoubleClicked(QTableWidgetItem *item);
-
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
 private:
