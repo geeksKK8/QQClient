@@ -69,12 +69,15 @@ void TcpClient::on_pushButtonEnter_clicked()
     else//已经进入了聊天室
     {
         //int length = 0;
-        QString msg = userName + ":Leave Chat Room";
+        QString msg = "3"+userName + ":Leave Chat Room";
 //        if((length = tcpsocket->write((char*)msg.toUtf8().data(), msg.length())) != msg.length())
 //        {
 //            return;
 //        }
         tcpsocket->write(msg.toUtf8().data());
+        ui->tableWidget->clear();
+        //for(int i=0;i<ui->tableWidget->rowCount()+1;i++)
+            //ui->tableWidget->removeRow(0);
         tcpsocket->disconnectFromHost();
         status = false;
         //离开聊天室就会触发disconnected信号
@@ -125,11 +128,28 @@ void TcpClient::slotreceive()
         int sz = string.split("_").size();
         ui->textEdit->append(msg.toHtmlEscaped());
         for(int i=0;i<ui->tableWidget->rowCount();i++)
-            ui->tableWidget->removeRow(i);
+            ui->tableWidget->removeRow(0);
+        //ui->tableWidget->clear();
         for(int i=1;i<sz;i++){
             QString name = string.split("_")[i];
             usrEnter(name);
         }
+    }
+
+    else if(sign=="3"){
+        qDebug()<<"fxxk 2";
+        QString string = tcpsocket->readAll();
+        QString name = string.split(":")[0];
+        qDebug()<<ui->tableWidget->rowCount();
+        for(int i=0;i<ui->tableWidget->rowCount();i++){
+            qDebug()<<ui->tableWidget->item(i,0)->text();
+            if(ui->tableWidget->item(i,0)->text() == name)
+            {
+                ui->tableWidget->removeRow(i);
+                break;
+            }
+        }
+        ui->textEdit->append(string.toHtmlEscaped());
     }
     else{
         QByteArray array = tcpsocket->readAll();
@@ -153,7 +173,7 @@ void TcpClient::on_pushButtonSend_clicked()
     {
         return;
     }
-    QString msg = "1"+userName + " :" + ui->msgTxtEdit->toPlainText();
+    QString msg = "1"+userName + ":" + ui->msgTxtEdit->toPlainText();
    // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
     tcpsocket->write(msg.toUtf8().data());
     ui->msgTxtEdit->clear();
@@ -255,7 +275,7 @@ void TcpClient::on_saveTBtn_clicked()
 void TcpClient::on_tableWidget_itemClicked(QTableWidgetItem *item)
 {
     qDebug()<<"succ!";
-    QString msg = "2"+ item->text() + " :" + ui->msgTxtEdit->toPlainText();
+    QString msg = "2"+ userName  + ":" + ui->msgTxtEdit->toPlainText()+"_"+item->text();
    // tcpsocket->write((char*)msg.toUtf8().data(), msg.length());
     tcpsocket->write(msg.toUtf8().data());
     ui->msgTxtEdit->clear();
